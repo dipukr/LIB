@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileLogger {
-	
 	private DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	private PrintWriter writer;
 
@@ -35,8 +34,7 @@ public class FileLogger {
 	
 	public void log(String kind, String format, Object ...args) {
 		var data = new StringBuilder();
-		data.append(String.format("[%s:%s] ", formatter.format(new Date()), kind));
-		data.append(' ');
+		data.append(String.format("[%s: %s] ", formatter.format(new Date()), kind));
 		data.append(String.format(format, args));
 		data.append('\n');
 		writer.write(data.toString());

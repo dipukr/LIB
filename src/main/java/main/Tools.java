@@ -1,5 +1,6 @@
 package main;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
@@ -14,6 +15,20 @@ public class Tools {
 			return MessageDigest.getInstance(algo);
 		} catch (NoSuchAlgorithmException e) {
 			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+	
+	public static String sha256(String input) {
+		try {
+			var digest = MessageDigest.getInstance("SHA-256");
+			byte[] bytes = input.getBytes(StandardCharsets.UTF_8);
+			byte[] hash = digest.digest(bytes);
+			var hexval = new StringBuilder();
+			for (byte b: hash)
+				hexval.append(String.format("%02x", b));
+			return hexval.toString();
+		} catch (NoSuchAlgorithmException e) {
+			return null;
 		}
 	}
 	
